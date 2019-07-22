@@ -75,7 +75,7 @@ function init_mouse() {
 
       x = evt.pageX - canvasMinX;
       y = evt.pageY - canvasMinY;
-      points.push(new Point(x, y));
+      addPoints(new Point(x, y));
     }
   });
 }
@@ -104,12 +104,7 @@ function initData() {
 function addRandomPoints(number) {
   running = false;
   for(var i = 0; i<number; i++) {
-    var point = randomPoint();
-    var pointN = new Point(point.x, point.y + sensorRange);
-    var pointS = new Point(point.x, point.y - sensorRange);
-    var pointE = new Point(point.x + sensorRange, point.y);
-    var pointW = new Point(point.x - sensorRange, point.y);
-    points.push(pointN, pointS, pointE, pointW);
+    addPoints(randomPoint());
   }
 }
 function drawCircle(point, highlight = false) {
@@ -158,4 +153,11 @@ function draw() {
 }
 function clearCanvas() {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
+}
+function addPoints(point) {
+  var pointN = new Point(point.x, point.y + sensorRange);
+  var pointS = new Point(point.x, point.y - sensorRange);
+  var pointE = new Point(point.x + sensorRange, point.y);
+  var pointW = new Point(point.x - sensorRange, point.y);
+  points.push(pointN, pointS, pointE, pointW);
 }
